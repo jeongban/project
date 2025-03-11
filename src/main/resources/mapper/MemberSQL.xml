@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+    <resultMap id="MemberResponseDTO" type="com.example.project.dto.MemberResponseDTO">
+        <result property = "Id" column="m_Id"/>
+        <result property = "name" column="m_name"/>
+        <result property = "username" column="m_username"/>
+        <result property = "role" column="m_role"/>
+    </resultMap>
+
+    <select id="searchMember" parameterType="MemberRequestDTO" resultMap="MemberResponseDTO">
+        SELECT
+            m_Id,
+            m_name,
+            m_username,
+            m_role
+        FROM member
+        WHERE m_username = #{username}
+    </select>
+
+    <insert id="save" parameterType="MemberRequestDTO" useGeneratedKeys="true" keyProperty="insertId">
+        INSERT INTO member (
+                            m_name,
+                            m_username,
+                            m_role
+        ) VALUES (
+                  #{name},
+                  #{username},
+                  #{role}
+                         )
+    </insert>
+</mapper>
