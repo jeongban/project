@@ -1,5 +1,7 @@
 package com.example.project.JWT;
 
+import com.example.project.DAO.MemberDAO;
+import com.example.project.service.UserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,19 +20,19 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.Optional;
-
+@Order(0)
 @RequiredArgsConstructor
 @Component
-@Order(0)
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JWTUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
+    private final UserDetailService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpRequest,
                                     HttpServletResponse httpResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
+
         String token = "";
         String username = "";
         try {
@@ -60,7 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String parseBearerToken(HttpServletRequest httpRequest) {
         return Optional.ofNullable(httpRequest.getHeader(HttpHeaders.AUTHORIZATION)) // http 요청에서 AUTHORIZATION헤더를 가져온다
-                .filter(token -> token.substring(0, 7).equalsIgnoreCase("Bearer")) // Bearer로 시작하는지 확인
+                .filter(token -> token.substring(0, 7).equalsIgnoreCase("Bearer ")) // Bearer로 시작하는지 확인
                 .map(token -> token.substring(7)) // 실제 토큰값 추출
                 .orElse(null); // 해당없으면 null
     }

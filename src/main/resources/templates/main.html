@@ -6,8 +6,11 @@
 <body>
 <h1>메인 페이지</h1>
 <div>
-    <a th:href="@{/members/login}">로그인 페이지</a>
-    <a th:href="@{/members/addMember}">회원가입 페이지</a>
+    <a id="login-button" th:href="@{/members/login}">로그인 페이지</a>
+    <button id="logout-button" style="display: none">로그아웃</button>
+    <a id="registration" th:href="@{/members/addMember}">회원가입 페이지</a>
+    <a id="admin" href="/admin/Admin.html" style="display: none">관리자 페이지</a>
 </div>
 </body>
+<script src="/js/main.js"></script>
 </html>

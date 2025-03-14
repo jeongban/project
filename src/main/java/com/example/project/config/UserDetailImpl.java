@@ -11,8 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDetailImpl implements UserDetails {
+
     private String username; // 아이디를 저장
+
     private String password; // 비밀번호를 저장
+
     private Collection<? extends GrantedAuthority> authorities; // 권한을 저장
 
     public UserDetailImpl(String username,

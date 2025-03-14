@@ -17,7 +17,7 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username){
-        MemberResponseDTO memberResponseDTO = memberDAO.getMember(username);
+        MemberResponseDTO memberResponseDTO = memberDAO.findMember(username);
         if(memberResponseDTO == null){
             throw new UsernameNotFoundException(username);
         }

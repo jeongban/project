@@ -41,7 +41,7 @@ public class JWTUtil {
     public String validateToken(String token) {
         try{
             return Jwts.parserBuilder()
-                    .setSigningKey(secretKey) // 서명 검증을 위한 키
+                    .setSigningKey(secretKey.getBytes()) // 서명 검증을 위한 키
                     .build()
                     .parseClaimsJws(token) // 토큰을 파싱해서 ClaimsJws객체로 변환
                     .getBody() // body 추출

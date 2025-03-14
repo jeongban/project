@@ -1,9 +1,12 @@
 package com.example.project.service;
 
 import com.example.project.DAO.MemberDAO;
+import com.example.project.dto.LoginRequestDTO;
+import com.example.project.dto.LoginResponseDTO;
 import com.example.project.dto.MemberRequestDTO;
 import com.example.project.dto.MemberResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +19,13 @@ public class MemberService {
     }
 
     public MemberResponseDTO findMember(MemberRequestDTO memberRequestDTO) {
-        MemberResponseDTO memberResponseDTO = memberDAO.getMember(memberRequestDTO.getUsername());
+        MemberResponseDTO memberResponseDTO = memberDAO.findMember(memberRequestDTO.getUsername());
         return memberResponseDTO;
+    }
+
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) throws BadRequestException {
+        LoginResponseDTO loginResponseDTO = memberDAO.login(loginRequestDTO);
+        return loginResponseDTO;
     }
 
 }
